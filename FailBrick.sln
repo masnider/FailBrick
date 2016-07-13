@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "FailBrickApplication", "FailBrickApplication\FailBrickApplication.sfproj", "{137D7BC6-3BE8-487E-AC65-FBD208E5BEF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FailBrick", "FailBrick\FailBrick.csproj", "{AD12535E-7DFA-453C-AF5A-38FA7014E335}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{137D7BC6-3BE8-487E-AC65-FBD208E5BEF3}.Debug|x64.ActiveCfg = Debug|x64
+		{137D7BC6-3BE8-487E-AC65-FBD208E5BEF3}.Debug|x64.Build.0 = Debug|x64
+		{137D7BC6-3BE8-487E-AC65-FBD208E5BEF3}.Debug|x64.Deploy.0 = Debug|x64
+		{137D7BC6-3BE8-487E-AC65-FBD208E5BEF3}.Release|x64.ActiveCfg = Release|x64
+		{137D7BC6-3BE8-487E-AC65-FBD208E5BEF3}.Release|x64.Build.0 = Release|x64
+		{137D7BC6-3BE8-487E-AC65-FBD208E5BEF3}.Release|x64.Deploy.0 = Release|x64
+		{AD12535E-7DFA-453C-AF5A-38FA7014E335}.Debug|x64.ActiveCfg = Debug|x64
+		{AD12535E-7DFA-453C-AF5A-38FA7014E335}.Debug|x64.Build.0 = Debug|x64
+		{AD12535E-7DFA-453C-AF5A-38FA7014E335}.Release|x64.ActiveCfg = Release|x64
+		{AD12535E-7DFA-453C-AF5A-38FA7014E335}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
