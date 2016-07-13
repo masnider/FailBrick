@@ -5,9 +5,9 @@ To get it started, grab the solution and tell Visual Studio to package it. Then 
 
 ``` posh
 
-Test-ServiceFabricApplicationPackage {packagePath}"
+Test-ServiceFabricApplicationPackage "{packagePath}"
 
-Copy-ServiceFabricApplicationPackage -ApplicationPackagePath {packagePath}" -ImageStoreConnectionString "file:C:\SfDevCluster\Data\ImageStoreShare"
+Copy-ServiceFabricApplicationPackage -ApplicationPackagePath "{packagePath}" -ImageStoreConnectionString "file:C:\SfDevCluster\Data\ImageStoreShare"
 
 Connect-ServiceFabricCluster
 
