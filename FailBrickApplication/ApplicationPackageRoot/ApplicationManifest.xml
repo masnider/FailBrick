@@ -25,7 +25,7 @@
          
          The attribute ServiceTypeName below must match the name defined in the imported ServiceManifest.xml file. -->
     <Service Name="FailBrick">
-      <StatefulService ServiceTypeName="FailBrickserviceType" TargetReplicaSetSize="[FailBrick_TargetReplicaSetSize]" MinReplicaSetSize="[FailBrick_MinReplicaSetSize]">
+      <StatefulService ServiceTypeName="FailBrickServiceType" TargetReplicaSetSize="[FailBrick_TargetReplicaSetSize]" MinReplicaSetSize="[FailBrick_MinReplicaSetSize]">
         <UniformInt64Partition PartitionCount="[FailBrick_PartitionCount]" LowKey="1" HighKey="4" />
       </StatefulService>
     </Service>

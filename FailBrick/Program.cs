@@ -35,12 +35,12 @@ namespace FailBrick
 
                 if (runningCrashMode == CrashMode.RegisterWrongType)
                 {
-                    ServiceRuntime.RegisterServiceAsync("SomeWrongServiceType", createUnreliableServiceType);
+                    ServiceRuntime.RegisterServiceAsync("SomeWrongServiceType", CreateUnreliableServiceType);
 
                     Thread.Sleep(Timeout.Infinite);
                 }
 
-                ServiceRuntime.RegisterServiceAsync("FailBrickserviceType", createUnreliableServiceType);
+                ServiceRuntime.RegisterServiceAsync("FailBrickServiceType", CreateUnreliableServiceType);
 
                 ServiceEventSource.Current.ServiceTypeRegistered(Process.GetCurrentProcess().Id, typeof(FailBrick).Name);
 
@@ -54,7 +54,7 @@ namespace FailBrick
             }
         }
 
-        private static FailBrick createUnreliableServiceType(StatefulServiceContext context)
+        private static FailBrick CreateUnreliableServiceType(StatefulServiceContext context)
         {
             if (runningCrashMode == CrashMode.CrashInRegistration)
             {
