@@ -26,7 +26,6 @@ namespace FailBrick
             }
         }
 
-
         private void UpdateConfigSettings(ConfigurationSettings configSettings)
         {
             try
@@ -51,14 +50,11 @@ namespace FailBrick
             {
                 return this.Settings[name].Value;
             }
-
         }
 
         protected virtual void OnChanged(EventArgs e)
         {
             Changed?.Invoke(this, e);
         }
-
-
     }
 }

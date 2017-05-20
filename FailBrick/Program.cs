@@ -16,7 +16,6 @@ namespace FailBrick
         {
             try
             {
-
                 configHandler = new ConfigHandler(FabricRuntime.GetActivationContext(), "FailureModes");
 
                 var crashmode = configHandler["Mode"];
