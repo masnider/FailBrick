@@ -9,7 +9,7 @@ using Microsoft.ServiceFabric.Services.Runtime;
 
 namespace FailBrick
 {
-    [EventSource(Name = "MyCompany-Application4-Stateful1")]
+    [EventSource(Name = "ServiceFabric-FailBrick")]
     internal sealed class ServiceEventSource : EventSource
     {
         public static readonly ServiceEventSource Current = new ServiceEventSource();
