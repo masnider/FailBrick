@@ -35,8 +35,11 @@ Today FailBrick supports the following failure modes, configured via Application
         CrashInReplicaRunAsync,
         CrashInReplicaDemote,
         CrashInReplicaClose,
-        CrashInReplicaConstruction
+        CrashInReplicaConstruction,
+        SlowCancellationShutdown,
+        HangCancellationShutdown
     }
+
   ```
 
 This parameter is upgradable and FailBrick will by default pick up the new setting and act on it immediately. So for exaple if you first deploy FailBrick configured to CrashBeforeRegistration, you can then do an Application Parameter upgrade to change it to None, and then upgrade the application (unmonitored auto), at which point the service will spring back to life!

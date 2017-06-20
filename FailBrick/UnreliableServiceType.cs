@@ -14,16 +14,16 @@ namespace FailBrick
     /// </summary>
     internal sealed class FailBrick : StatefulService
     {
-        private readonly ConfigHandler ConfigHandler;
-        private CrashMode FailureMode;
+        private readonly ConfigHandler configHandler;
+        private CrashMode crashMode;
 
         public FailBrick(StatefulServiceContext context, ConfigHandler handler)
             : base(context)
         {
-            this.ConfigHandler = handler;
-            this.ConfigHandler.Changed += ConfigHandler_Changed;
+            this.configHandler = handler;
+            this.configHandler.Changed += this.ConfigHandler_Changed;
 
-            if (this.FailureMode == CrashMode.CrashInReplicaConstruction)
+            if (this.crashMode == CrashMode.CrashInReplicaConstruction)
             {
                 throw new Exception("crash in replica construction");
             }
@@ -31,30 +31,22 @@ namespace FailBrick
 
         private void ConfigHandler_Changed(object sender, EventArgs e)
         {
-            Enum.TryParse<CrashMode>(this.ConfigHandler["Mode"], out this.FailureMode);
+            Enum.TryParse<CrashMode>(this.configHandler["Mode"], out this.crashMode);
         }
 
         protected override Task OnOpenAsync(ReplicaOpenMode openMode, CancellationToken cancellationToken)
         {
-            if (this.FailureMode == CrashMode.CrashInReplicaOpen)
+            if (this.crashMode == CrashMode.CrashInReplicaOpen)
             {
                 throw new Exception("crash in replica open");
             }
 
             return Task.FromResult<bool>(true);
         }
-
-
-        /// <summary>
-        /// Optional override to create listeners (e.g., HTTP, Service Remoting, WCF, etc.) for this service replica to handle client or user requests.
-        /// </summary>
-        /// <remarks>
-        /// For more information on service communication, see http://aka.ms/servicefabricservicecommunication
-        /// </remarks>
-        /// <returns>A collection of listeners.</returns>
+        
         protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
         {
-            if (this.FailureMode == CrashMode.CrashInListenerCreation)
+            if (this.crashMode == CrashMode.CrashInListenerCreation)
             {
                 throw new Exception("crash in listenerCreation");
             }
@@ -62,50 +54,59 @@ namespace FailBrick
             return new ServiceReplicaListener[0];
         }
 
-        /// <summary>
-        /// This is the main entry point for your service replica.
-        /// This method executes when this replica of your service becomes primary and has write status.
-        /// </summary>
-        /// <param name="cancellationToken">Canceled when Service Fabric needs to shut down this service replica.</param>
         protected override async Task RunAsync(CancellationToken cancellationToken)
         {
-            if (this.FailureMode == CrashMode.CrashInReplicaRunAsync)
+            if (this.crashMode == CrashMode.CrashInReplicaRunAsync)
             {
                 throw new Exception("crash in RunAsync");
             }
 
             var myDictionary = await this.StateManager.GetOrAddAsync<IReliableDictionary<string, long>>("myDictionary");
-
-            while (!cancellationToken.IsCancellationRequested)
+            
+            try
             {
-                using (var tx = this.StateManager.CreateTransaction())
+
+                while (!cancellationToken.IsCancellationRequested)
                 {
-                    var result = await myDictionary.TryGetValueAsync(tx, "Counter");
+                    using (var tx = this.StateManager.CreateTransaction())
+                    {
+                        var result = await myDictionary.TryGetValueAsync(tx, "Counter");
 
-                    ServiceEventSource.Current.ServiceMessage(this, "Current Counter Value: {0}",
-                        result.HasValue ? result.Value.ToString() : "Value does not exist.");
+                        ServiceEventSource.Current.ServiceMessage(this, "Current Counter Value: {0}",
+                            result.HasValue ? result.Value.ToString() : "Value does not exist.");
 
-                    await myDictionary.AddOrUpdateAsync(tx, "Counter", 0, (key, value) => ++value);
+                        await myDictionary.AddOrUpdateAsync(tx, "Counter", 0, (key, value) => ++value);
 
-                    // If an exception is thrown before calling CommitAsync, the transaction aborts, all changes are 
-                    // discarded, and nothing is saved to the secondary replicas.
-                    await tx.CommitAsync();
+                        // If an exception is thrown before calling CommitAsync, the transaction aborts, all changes are 
+                        // discarded, and nothing is saved to the secondary replicas.
+                        await tx.CommitAsync();
+                    }
+
+                    await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
                 }
 
-                await Task.Delay(TimeSpan.FromSeconds(1), cancellationToken);
+            }
+            catch (TaskCanceledException)
+            {
+                if (this.crashMode == CrashMode.SlowCancellationShutdown)
+                {
+                    await Task.Delay(TimeSpan.FromMinutes(5));
+                }
+                else if (this.crashMode == CrashMode.HangCancellationShutdown)
+                {
+                    await Task.Delay(TimeSpan.MaxValue);
+                }
             }
 
-            if (this.FailureMode == CrashMode.CrashInReplicaDemote)
+            if (this.crashMode == CrashMode.CrashInReplicaDemote)
             {
                 throw new Exception("crash when being demoted");
             }
-
-            cancellationToken.ThrowIfCancellationRequested();
         }
 
         protected override Task OnCloseAsync(CancellationToken cancellationToken)
         {
-            if (this.FailureMode == CrashMode.CrashInReplicaClose)
+            if (this.crashMode == CrashMode.CrashInReplicaClose)
             {
                 throw new Exception("crash in replica open");
             }

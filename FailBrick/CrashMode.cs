@@ -12,6 +12,8 @@
         CrashInReplicaRunAsync,
         CrashInReplicaDemote,
         CrashInReplicaClose,
-        CrashInReplicaConstruction
+        CrashInReplicaConstruction,
+        SlowCancellationShutdown,
+        HangCancellationShutdown
     }
 }
