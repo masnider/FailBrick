@@ -1,1 +1,1 @@
-C:\Users\masnider\Source\Repos\masnider\FailBrick\FailBrickApplication\obj\x64\Debug\FailBrickApplication.sfprojResolveAssemblyReference.cache
+C:\Users\masnider\Source\Repos\masnider\FailBrick\FailBrickApplication\obj\x64\Debug\FailBrickApplication.sfproj.CoreCompileInputs.cache

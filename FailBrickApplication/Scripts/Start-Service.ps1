@@ -1,0 +1,1 @@
+﻿New-ServiceFabricService -ApplicationName fabric:/FailBrickApplication -MinReplicaSetSize 3 -PartitionSchemeSingleton -ServiceName fabric:/FailBrickApplication/FailBrick -ServiceTypeName FailBrickserviceType -Stateful -TargetReplicaSetSize 3 -HasPersistedState
