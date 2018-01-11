@@ -14,7 +14,7 @@
   <CodePackage Name="Code" Version="1.0.0">
     <EntryPoint>
       <ExeHost>
-        <Program>Stateful1.exe</Program>
+        <Program>Failbrick.exe</Program>
       </ExeHost>
     </EntryPoint>
   </CodePackage>

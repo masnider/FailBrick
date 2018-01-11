@@ -1,6 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Application xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="fabric:/Application4" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+<Application xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="fabric:/FailBrickApplication" xmlns="http://schemas.microsoft.com/2011/01/fabric">
   <Parameters>
+    <!--<Parameter Name="FailureMode" Value="CrashInReplicaClose" />-->
+    <!--<Parameter Name="FailureMode" Value="CrashInReplicaDemote" />-->
+    <!--<Parameter Name="FailureMode" Value="CrashInReplicaRunAsync" />-->
+    <!--<Parameter Name="FailureMode" Value="CrashInListenerCreation" />-->
+    <!--<Parameter Name="FailureMode" Value="CrashInReplicaOpen" />-->
+    <!--<Parameter Name="FailureMode" Value="RegisterTypeSlow" />-->
+    <!--<Parameter Name="FailureMode" Value="RegisterWrongType" />-->
+    <!--<Parameter Name="FailureMode" Value="CrashInRegistration" />-->
+    <!--<Parameter Name="FailureMode" Value="CrashBeforeRegistration" />-->
     <Parameter Name="FailureMode" Value="None" />
+    <!--<Parameter Name="FailureMode" Value="CrashInReplicaConstruction" />-->
   </Parameters>
 </Application>

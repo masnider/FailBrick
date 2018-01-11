@@ -7,12 +7,13 @@
     <ProjectGuid>{AD12535E-7DFA-453C-AF5A-38FA7014E335}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Stateful1</RootNamespace>
-    <AssemblyName>Stateful1</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <RootNamespace>Failbrick</RootNamespace>
+    <AssemblyName>Failbrick</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <IsServiceFabricServiceProject>True</IsServiceFabricServiceProject>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
     <DebugSymbols>true</DebugSymbols>
@@ -83,7 +84,9 @@
     <None Include="PackageRoot\Config\Settings.xml">
       <SubType>Designer</SubType>
     </None>
-    <None Include="PackageRoot\ServiceManifest.xml" />
+    <None Include="PackageRoot\ServiceManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
